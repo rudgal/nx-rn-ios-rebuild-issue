@@ -17,9 +17,15 @@
         "command": "nx start client/app"
       }
     },
+    "patch-ios-incremental-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "touch apps/client/app/ios/.xcode.env"
+      }
+    },
     "run-ios": {
       "executor": "@nx/react-native:run-ios",
-      "dependsOn": ["ensure-symlink", "sync-deps", "pod-install"],
+      "dependsOn": ["ensure-symlink", "sync-deps", "patch-ios-incremental-build" ,"pod-install"],
       "options": {}
     },
     "bundle-ios": {
